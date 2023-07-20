@@ -1,0 +1,14 @@
+                                                    LINUX SYSTEM PROGRAMMING ASSIGNMENT 4.
+													
+1. Write a program which is used to demonstrate concept of I/O redirection.
+
+2. Write a program which accept directory name from user and create new directory of that name.
+
+3. Write a program which accept two file names from user and check whether contents of that two files are equal or not.
+
+4. Write a program which accept directory name from user and copy first 10 bytes from all regular files into newly created file 
+    named as Demo.txt.
+	
+5. Write a program which accept file name and position from user and read 20 bytes from that position.
+
+

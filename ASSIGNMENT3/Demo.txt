@@ -1,0 +1,30 @@
+The most basic and common system call used for writing is write(). write() is the
+counterpart of read() and is also defined in POSIX.1:
+#include <unistd.h>
+ssize_t write (int fd, const void *buf, size_t count);
+A call to write() writes up to count bytes starting at buf to the current position of the
+file referenced by the file descriptor fd. Files backed by objects that do not support
+seeking (for example, character devices) always write starting at the “head.”
+
+On success, the number of bytes written is returned, and the file position is updated in
+kind. On error, −1 is returned and errno is set appropriately. A call to write() can return
+0, but this return value does not have any special meaning; it simply implies that zero
+bytes were written.
+As with read(), the most basic usage is simple:
+const char *buf = "My ship is solid!";
+ssize_t nr;
+/* write the string in 'buf' to 'fd' */
+nr = write (fd, buf, strlen (buf));
+if (nr == −1)
+/* error */
+But again, as with read(), this usage is not quite right. Callers also need to check for
+the possible occurrence of a partial write:
+unsigned long word = 1720;
+size_t count;
+ssize_t nr;
+count = sizeof (word);
+nr = write (fd, &word, count);
+if (nr == −1)
+/* error, check errno */
+else if (nr != count)
+/* possible error, but 'errno' not set */
