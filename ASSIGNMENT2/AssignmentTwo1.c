@@ -1,8 +1,9 @@
+//Assignment2
 //1. Write a program to accept file name from user and read whole file.
 
-#include<stdio.h>;
-#include<stdlib.h>;
-#include<fcntl.h>;
+#include<stdio.h>
+#include<stdlib.h>
+#include<fcntl.h>
 #define BLOCKSIZE 1024
 
 int main(int argc, char *argv[])
@@ -21,10 +22,11 @@ int main(int argc, char *argv[])
     fd = open(argv[1], O_RDONLY);
     if(fd == -1)
     {
-        printf("Unable to open file\n");
+        printf("Unable to open %s file\n", argv[1]);
         return -1;
     }
-
+	
+	printf("File Data:\n");
     while((Ret = read(fd,Buffer,sizeof(Buffer))) != 0)
     {
         write(1,Buffer,Ret);

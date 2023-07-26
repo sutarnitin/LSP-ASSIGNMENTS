@@ -19,14 +19,10 @@ int main(int argc, char *argv[])
 
 
 
-//Output
-
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ls
-// Assignment4.txt  AssignmentFour1.c  AssignmentFour2.c  AssignmentFour3.c  AssignmentFour4.c  AssignmentFour5.c  myDir  myexe
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ touch input.txt
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ gcc AssignmentFour1.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ./myexe < input.txt > output.txt
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ls
-// Assignment4.txt  AssignmentFour1.c  AssignmentFour2.c  AssignmentFour3.c  AssignmentFour4.c  AssignmentFour5.c  input.txt  myDir  myexe  output.txt
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ cd output.txt
-// bash: cd: output.txt: Not a directory
+/*Output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ gcc AssignmentFour1.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ./myexe <input.txt > output.txt
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ls
+abc.txt          AssignmentFour1.c  AssignmentFour3.c  AssignmentFour5.c  hello.txt  myDir  output.txt       que4output1.txtclear
+Assignment4.txt  AssignmentFour2.c  AssignmentFour4.c  demo.txt           input.txt  myexe  que4output1.txt  que4output.txt
+*/

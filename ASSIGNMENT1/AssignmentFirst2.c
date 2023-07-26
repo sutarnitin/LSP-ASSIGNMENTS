@@ -17,35 +17,40 @@ int main(int argc, char * argv[])
 	if(strcmp(argv[2], "read") == 0)
 	 {
 		 mode = R_OK;
-	 }else if(strcmp(argv[2], "write") == 0)
+	 }
+	 else if(strcmp(argv[2], "write") == 0)
 	 {
 		 mode = W_OK;
-	 }else if(strcmp(argv[2], "execute") == 0)
+	 }
+	 else if(strcmp(argv[2], "execute") == 0)
 	 {
 		 mode = X_OK;
 	 }
 	 	
 	fd = open(argv[1], mode);
 	
-	if(fd == -1){
-		printf("Unable to open the file\n");
+	if(fd == -1)
+	{
+		printf("Unable to open the %s file\n", argv[1]);
 		return -1;	
-	}else{
-		printf("File is successfully opened with %d\n ", fd);	
+	}
+	else
+	{
+		printf("%s File is successfully opened with %s mode\n  ", argv[1], argv[2]);	
 	}
 	
 	return 0;
 }
 
 
-//output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ gcc AssignmentFirst2.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ ./myexe 
-// insufficeint Arguments
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ ./myexe Demo.txt read
-// File is successfully opened with 3
- // nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ 
-
+/*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ gcc AssignmentFirst2.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ ./myexe Demo.txt write
+Demo.txt File is successfully opened with write mode
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ ./myexe Demo.txt read
+Demo.txt File is successfully opened with read mode
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$
+*/
 
 
 

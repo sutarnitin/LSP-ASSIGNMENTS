@@ -9,8 +9,8 @@
 int main(int argc, char *argv[])
 {
     int fd = 0;
-    char Buffer[20] = {'\0'};
-    int Ret = 0;
+    char buffer[20] = {'\0'};
+    int ret = 0;
 
     if(argc != 3)
     {
@@ -21,29 +21,30 @@ int main(int argc, char *argv[])
     fd = open(argv[1], O_RDONLY);
     if(fd == -1)
     {
-        printf("Unable to open file\n");
+        printf("Unable to open %s file\n", argv[1]);
         return -1;
     }
 	
 	lseek(fd, atoi(argv[2]), SEEK_CUR);
 	
-    Ret = read(fd,Buffer,20);
-    if(Ret == 0)
+    ret = read(fd,buffer,20);
+    if(ret == 0)
     {
-        printf("Unable to read data from file\n");
+        printf("Unable to read data from %s file\n", argv[1]);
         return -1;
     }
 
-    printf("Data from file is : %s\n",Buffer);
-
+    printf("20 bytes date from %s file after %s position:\n %s\n",argv[1], argv[2],buffer);
+	close(fd);
     return 0;
 }
 
 
 
-//Output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ gcc AssignmentFour5.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ./myexe abc.txt 20
-// Data from file is : file offset to be se
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ 
-
+/*sOutput
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ gcc AssignmentFour5.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ ./myexe que5_test.txt 15
+20 bytes date from que5_test.txt file after 15 position:
+ the  file offset to 
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT4$ 
+*/

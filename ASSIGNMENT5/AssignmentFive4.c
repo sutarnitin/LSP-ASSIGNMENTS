@@ -1,4 +1,5 @@
-//4. Write a program which  accept directory name from user and combine all contains of file from that directory into one file named as All Combine.
+//4. Write a program which  accept directory name from user and combine all contains of file from that directory into one
+//    file named as All Combine.
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -8,119 +9,93 @@
 #include<dirent.h>
 #include<sys/stat.h>
 
+#define BLOCKSIZE 1024
 
 int main(int argc, char *argv[])
 {
-    int ret = 0, fd=0, fd1=0;
+	int fd=0, dest_fd=0, ret=0;
+    char size_of_file[50];
+	DIR *dp = NULL;
+	char *path = NULL;
 	struct stat sobj;
 	struct dirent *entry = NULL;
-	char buffer[20] = {'\0'},dir_name[strlen(argv[1])];
-	char * temp;
-    DIR *dp = NULL;
-    
-	memcpy(dir_name, argv[1], strlen(argv[1]));
-	if(argc != 2)
+	char buffer[BLOCKSIZE] = {'\0'};
+	
+	if(argc != 3)
 	{
 		printf("insufficient arguments\n");
 		return -1;
 	}
-
-    dp = opendir(argv[1]);
+	
+	dp = opendir(argv[1]);
     if(dp == NULL)
     {
-        printf("Unable to open directory\n");
+        printf("Unable to open %s directory\n", argv[1]);
         return -1;
     }
 	
-	fd1 = open("allcombined.txt", O_CREAT|O_WRONLY, 0777);
-    if(fd1 == -1)
+	dest_fd = creat(argv[2], 0777);
+    if(dest_fd == -1)
     {
-        printf("Unable to create destination file\n");
+        printf("Unable to create %s destination file\n", argv[2]);
         return -1;
     }
-
-    while((entry = readdir(dp)) != NULL)
-    {
-		asprintf(&temp, "%s%s", dir_name, entry->d_name);
-		
-		if(stat(temp, &sobj) ==0)
+	
+	while((entry = readdir(dp)) != NULL)
+	{
+		path = malloc(strlen(argv[1])+strlen(entry->d_name)+1);
+		sprintf(path,"%s/%s", argv[1], entry->d_name);
+		stat(path, &sobj);
+		if(S_ISREG(sobj.st_mode) && (sobj.st_size!=0))
 		{
-			if(S_ISREG(sobj.st_mode) && (sobj.st_size!=0))
+			fd = open(path, O_RDONLY);
+			if(fd == -1)
 			{
-				printf("File name : %s\n", entry->d_name);
-				printf("File size is : %d\n", sobj.st_size);
-				fd = open(temp, O_RDONLY);
-				
-				if(fd == -1)
-				{
-					printf("1. Unable to open file %s\n", entry->d_name);
-				}
-				else
-				{
-					while((ret = read(fd,buffer,sizeof(buffer))) != 0)
-					{
-						printf("Writing %s\n", buffer);
-						write(fd1, buffer, sizeof(buffer));
-						memset(buffer, 0, sizeof(buffer));
-					}
-				}
+				printf("1. Unable to open file %s\n", entry->d_name);
 			}
 			else
 			{
-				printf("%s is not a regular file\n", entry->d_name);
+				printf("File : %s \n", entry->d_name);
+				printf("size: %d\n",sobj.st_size);
+				sprintf(size_of_file, "%d", sobj.st_size);
+				write(dest_fd, entry->d_name, strlen(entry->d_name));
+				write(dest_fd, size_of_file, strlen(size_of_file));
+				while((ret = read(fd, buffer, sizeof(buffer))) != 0)
+				{
+					write(dest_fd, buffer, ret);
+					memset(buffer, 0, sizeof(buffer));
+				}
+				printf("Successfully written all the data from %s file into %s file \n", entry->d_name, argv[2]);
 			}
+			close(fd);
 		}
 		else
 		{
-			printf("Unable to open %s file\n", entry->d_name);
+			printf("%s is not a regular file\n", entry->d_name);
 		}
-		close(fd);
-		
 		printf("============================\n");
 	}
-	close(fd1);
+	close(dest_fd);
+	printf("Successfully write all file data into %s file \n", argv[2]);
+	return 0;
 }
 
-//output
 
-/* nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./myexe /home/nitin/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5/que3/
-File name : demo.txt
-File size is : 4
-Number of links : 1
-Inode number : 1853166
-File system number : 2055
-Number of blocks : 8
-User Id : 1000
-Group Id : 1000
-Block Size: 4096
-abc
-============================
+/*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ gcc AssignmentFive4.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./myexe que3_test_dir all_combined.txt
 .. is not a regular file
 ============================
-File name : hello.txt
-File size is : 4
-Number of links : 1
-Inode number : 1853167
-File system number : 2055
-Number of blocks : 8
-User Id : 1000
-Group Id : 1000
-Block Size: 4096
-abc
+File : Hello.txt 
+size: 1338
+Successfully written all the data from Hello.txt file into all_combined.txt file 
 ============================
-File name : input.txt
-File size is : 12
-Number of links : 1
-Inode number : 1853168
-File system number : 2055
-Number of blocks : 8
-User Id : 1000
-Group Id : 1000
-Block Size: 4096
-10
-20
-40
+File : Demo.txt 
+size: 1338
+Successfully written all the data from Demo.txt file into all_combined.txt file 
 ============================
 . is not a regular file
 ============================
+Successfully write all file data into all_combined.txt file 
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ 
 */

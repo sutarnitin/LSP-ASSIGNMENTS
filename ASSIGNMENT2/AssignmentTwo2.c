@@ -9,10 +9,9 @@ int main(int argc, char *argv[])
 {
 		
     int fd = 0;
-    int Ret = 0;
-    char buffer[BLOCKSIZE];
+    char buffer[BLOCKSIZE] = "Write a program which accept file name from user and write String in that file.";
 
-    if(argc != 3)
+    if(argc != 2)
     {
         printf("Insufficient arguments\n");
         return -1;
@@ -21,18 +20,21 @@ int main(int argc, char *argv[])
     fd = open(argv[1], O_WRONLY);
     if(fd == -1)
     {
-        printf("Unable to open file\n");
+        printf("Unable to open %s file\n", argv[1]);
         return -1;
     }
 	
-    while((Ret = read(fd,buffer,sizeof(buffer))) != 0)
-    {
-        write(fd,buffer,Ret);
-		memset(buffer,0,sizeof(buffer));
-    }
-    
+    write(fd,buffer,sizeof(buffer));
+	printf("Data successfully write into %s file\n", argv[1]);
     close(fd);
 
     return 0;
 	
 }
+
+/* output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ gcc AssignmentTwo2.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ ./myexe hello.txt
+Data successfully write into hello.txt file
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ 
+*/

@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     dp = opendir(argv[1]);
     if(dp == NULL)
     {
-        printf("Unable to open directory\n");
+        printf("Unable to open %s directory \n", argv[1]);
         return -1;
     }
 	
@@ -36,13 +36,14 @@ int main(int argc, char *argv[])
 	
 }
 
-//Output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ gcc AssignmentTwo3.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ ./myexe MYFILES
-// AssignmentTwo2.c
-// ..
-// Assignment2.txt
-// AssignmentTwo3.c
-// .
-// AssignmentTwo1.c
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$
+/*Output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ gcc AssignmentTwo3.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$ ./myexe MYFILES
+AssignmentTwo2.c
+..
+Assignment2.txt
+AssignmentTwo3.c
+.
+AssignmentTwo1.c
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT2$
+*/

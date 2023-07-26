@@ -12,3 +12,45 @@ w+
 Open the file for both reading and writing. If the file exists, it is truncated to zero
 length. If the file does not exist, it is created. The stream is positioned at the start
 of the file.
+Modes
+mayu The mode argument describes how to open the given file. It is one of the following strings:
+r
+Open the file for reading. The stream is positioned at the start of the file.
+r+
+Open the file for both reading and writing. The stream is positioned at the start of
+the file.
+w
+Open the file for writing. If the file exists, it is truncated to zero length. If the file
+does not exist, it is created. The stream is positioned at the start of the file.
+w+
+ranu Open the file for both reading and writing. If the file exists, it is truncated to zero
+length. If the file does not exist, it is created. The stream is positioned at the start
+of the file.
+Modes
+The mode argument describes how to open the given file. It is one of the following strings:
+r
+Open the file for reading. The stream is positioned at the start of the file.
+r+
+nitu Open the file for both reading and writing. The stream is positioned at the start of
+the file.
+w
+Open the file for writing. If the file exists, it is truncated to zero length. If the file
+does not exist, it is created. The stream is positioned at the start of the file.
+w+
+Open the file for both reading and writing. If the file exists, it is truncated to zero
+length. If the file does not exist, it is created. The stream is positioned at the start
+of the file.
+Modes
+The mode argument describes how to open the given file. It is one of the following strings:
+r
+Open the file for reading. The stream is positioned at the start of the file.
+r+
+Open the file for both reading and writing. The stream is positioned at the start of
+the file.
+w
+Open the file for writing. If the file exists, it is truncated to zero length. If the file
+does not exist, it is created. The stream is positioned at the start of the file.
+w+
+Open the file for both reading and writing. If the file exists, it is truncated to zero
+length. If the file does not exist, it is created. The stream is positioned at the start
+of the file. ok...

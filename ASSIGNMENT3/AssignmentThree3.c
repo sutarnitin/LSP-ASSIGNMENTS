@@ -10,46 +10,62 @@
 
 int main(int argc, char *argv[])
 {
-    DIR *dp = NULL;
+    DIR *source = NULL;
+	DIR *destination = NULL;
     struct dirent *entry = NULL;
-    char oldname[50];
-    char newname[50];
-    int iCnt = 1;
+    char *source_name= NULL;
+    char *dest_name= NULL;
     
-    dp = opendir(argv[1]);
-    if(dp == NULL)
+	if(argc != 3)
+	{
+		printf("insufficient Arguments\n");
+		return -1;
+	}
+	
+    source = opendir(argv[1]);
+	destination = opendir(argv[2]);
+    if(source == NULL)
     {
-        printf("Unable to open directory\n");
+        printf("Unable to open %s directory\n", argv[1]);
         return -1;
     }
 
-    while((entry = readdir(dp)) != NULL)
+    while((entry = readdir(source)) != NULL)
     {
-        sprintf(oldname,"%s/%s",argv[1],entry->d_name);
-		printf("a***", entry->d_name);
-        sprintf(newname,"%s/%d.txt",argv[2],iCnt);
-
-        rename(oldname,newname);
-        iCnt++;
+		source_name = malloc(strlen(argv[1])+strlen(entry->d_name)+1);
+		dest_name = malloc(strlen(argv[2])+strlen(entry->d_name)+1);
+        sprintf(source_name,"%s/%s",argv[1],entry->d_name);
+        sprintf(dest_name,"%s/%s",argv[2],entry->d_name);
+        rename(source_name,dest_name);
     }
+	printf("Successfully move files from %s directory to %s directory\n", argv[1], argv[2]);
 
-    closedir(dp);
+    closedir(source);
+    closedir(destination);
     return 0;
 }
 
 
 
-//output:
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ gcc AssignmentThree3.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe DATA MYFILES
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ cd DATA/
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DATA$ ls
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DATA$ cd ..
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ cd MYFILES
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/MYFILES$ ls
-// 1.txt  3.txt  4.txt  5.txt  6.txt
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/MYFILES$ 
-
+/*output:
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ gcc AssignmentThree3.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ cd DATA
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DATA$ ls
+f1.txt  f2.txt  hello.txt
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DATA$ cd ..
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ cd DESTINATION/
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DESTINATION$ ls
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DESTINATION$ cd ..
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe DATA DESTINATION
+Successfully move files from DATA directory to DESTINATION directory
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ cd DATA
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DATA$ ls
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DATA$ cd ..
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ cd DESTINATION/
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DESTINATION$ ls
+f1.txt  f2.txt  hello.txt
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3/DESTINATION$
+*/
 
 
 //sprintf stands for "string print". In C programming language, it is a file handling function that is used to send formatted output to the

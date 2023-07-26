@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     dp = opendir(argv[1]);
     if(dp == NULL)
     {
-        printf("Unable to open directory\n");
+        printf("Unable to open %s directory \n", argv[1]);
         return -1;
     }
 

@@ -23,10 +23,12 @@ int main(int argc, char * argv[])
     fd = open(argv[1], O_RDONLY);
     if(fd == -1)
     {
-        printf("Unable to open file\n");
+        printf("Unable to open %s file\n", argv[1]);
         return -1;
-    }else{
-		printf("File successfully opened in read mode\n");
+    }
+	else
+	{
+		printf("%s file successfully opened in read mode\n", argv[1]);
 	}
 
     Size = atoi(argv[2]);
@@ -36,7 +38,7 @@ int main(int argc, char * argv[])
     Ret = read(fd,Buffer,Size);
     if(Ret == 0)
     {
-        printf("Unable to read data from file\n");
+        printf("Unable to read data from %s file\n", argv[1]);
         return -1;
     }
 
@@ -48,11 +50,11 @@ int main(int argc, char * argv[])
 }
 
 
-//output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ gcc AssignmentFirst5.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ ./myexe Demo.txt 11
-// File successfully opened in read mode
-// File data is : 
-// Jay Ganesha
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ 
-
+/*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ gcc AssignmentFirst5.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ ./myexe Demo.txt 11
+Demo.txt file successfully opened in read mode
+File data is : 
+Jay Ganesha
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT1$ 
+*/

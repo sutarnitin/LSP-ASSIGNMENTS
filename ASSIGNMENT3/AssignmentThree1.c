@@ -20,14 +20,14 @@ int main(int argc, char *argv[])
 	srcfd = open(argv[1], O_RDONLY);
 	if(srcfd == -1)
 	{
-		printf("Unable to open source file\n");
+		printf("Unable to open source %s file\n", argv[1]);
         return -1;
 	}
 	
 	destfd = creat(argv[2], 0777);
 	if(destfd == -1)
 	{
-		printf("Unable to create file\n");
+		printf("Unable to create %s file\n", argv[2]);
         return -1;
 	}
 	
@@ -39,15 +39,17 @@ int main(int argc, char *argv[])
 	
 	close(srcfd);
 	close(destfd);
-	
+	printf("Successfully data inserted into %s file\n", argv[2]);
 	return 0;
 	
 }
 
 
-//output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ gcc AssignmentThree1.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe Demo.txt Hello.txt
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ls
-// Assignment3.txt  AssignmentThree1.c  AssignmentThree2.c  AssignmentThree3.c  AssignmentThree4.c  Demo.txt  Hello.txt  myexe
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$
+/*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ gcc AssignmentThree1.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe Demo.txt Hello.txt
+Successfully data inserted into Hello.txt file
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ls
+Assignment3.txt  AssignmentThree1.c  AssignmentThree2.c  AssignmentThree3.c  AssignmentThree4.c  Demo.txt  Hello.txt  myexe
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$
+*/

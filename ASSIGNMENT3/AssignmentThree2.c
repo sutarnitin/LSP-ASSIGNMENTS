@@ -22,36 +22,23 @@ int main(int argc, char *argv[])
     dp = opendir(argv[1]);
     if(dp == NULL)
     {
-        printf("Unable to open directory\n");
+        printf("Unable to open %s directory\n", argv[1]);
         return -1;
     }
 	
-	// while((entry = readdir(dp)) != NULL)
-    // {
-		// fd = open(argv[2], O_RDONLY);
-		// if(fd == -1)
-		// {
-			// printf("File is not present\n");
-		// }else{
-			// printf("File is present\n");
-			// break;
-		// }
-		// close(fd);
-    // }
-
-    while((entry = readdir(dp)) != NULL)
+	while((entry = readdir(dp)) != NULL)
     {
 
         if((strcmp(argv[2], entry->d_name)) == 0)
         {
-            printf("File is present in directory\n");
+            printf("%s file is present in %s directory\n", argv[2], argv[1]);
             break;
         }
     }
 
     if(entry == NULL)
     {
-        printf("There is no such file\n");
+        printf("There is no such %s file present in %s directory\n", argv[2], argv[1]);
         return -1;
     }
     closedir(dp);
@@ -61,8 +48,11 @@ int main(int argc, char *argv[])
 }
 
 
-//output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ gcc AssignmentThree2.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe MYFILES Hello.txt 
-// File is present
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ 
+/*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ gcc AssignmentThree2.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe MYFILES a.txt
+a.txt file is present in MYFILES directory
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$ ./myexe MYFILES Hello.txt 
+There is no such Hello.txt file present in MYFILES directory
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT3$
+*/
