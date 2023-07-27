@@ -10,9 +10,9 @@
 struct employee
 {
     int empId;
-    char ename[20];
 	double salary;
     int age;
+	char ename[20];
 };
 
 int main(int argc, char *argv[])
@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 	
     fd = open(argv[1],O_RDONLY);
 	
-
     read(fd,&eobj,sizeof(fname));
 	//printf("1. %s", fname);
     printf("Employee ID : %d : \n",eobj.empId);
