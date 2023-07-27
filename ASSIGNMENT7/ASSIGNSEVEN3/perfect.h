@@ -1,0 +1,1 @@
+void CheckPerfect(int iNo);
