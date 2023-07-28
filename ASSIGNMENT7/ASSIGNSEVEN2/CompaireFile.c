@@ -27,7 +27,7 @@ int CompaireFile(char *file1, char *file2)
 			return -1;
 		}
 		else{
-			printf("Size are same. Lets check the data. \n");
+			printf("Size are same.\n");
 		}
 	}
 	else{
@@ -45,22 +45,22 @@ int CompaireFile(char *file1, char *file2)
 	
 	while((ret1 = read(fd1, buffer1, sizeof(buffer1))) != 0 && (ret2 = read(fd2, buffer2, sizeof(buffer2))) != 0)
 	{
-		printf("1. %s", buffer1);
-		printf("2. %s", buffer2);
+		//printf("1. %s", buffer1);
+		//printf("2. %s", buffer2);
 		if(strncmp(buffer1, buffer2, sizeof(buffer1)) != 0)
 		{
-			printf("Two files are not equal");
+			printf("Two files are not equal\n");
 			return -1;
 		}
 		memset(buffer1, 0, sizeof(buffer1));
 		memset(buffer2, 0, sizeof(buffer2));
 	}
-	printf("Two files have equal contents");
+	printf("Two files have equal contents\n");
 
 	close(fd1);
 	close(fd2);
 	
-	return -1;
+	return 0;
 }
 
 

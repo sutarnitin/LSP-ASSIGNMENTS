@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include"AssignmentSeven1.h"
 
 int Multiplication(int iNo1, int iNo2)
 {

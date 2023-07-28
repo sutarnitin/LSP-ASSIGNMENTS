@@ -14,7 +14,8 @@
 int main(int argc, char *argv[])
 {
 	int fd=0, dest_fd=0, ret=0;
-    char size_of_file[50];
+    char size_of_file[50]={'\0'};
+	char length_of_file_name[50]={'\0'};
 	DIR *dp = NULL;
 	char *path = NULL;
 	struct stat sobj;
@@ -57,15 +58,24 @@ int main(int argc, char *argv[])
 			{
 				printf("File : %s \n", entry->d_name);
 				printf("size: %d\n",sobj.st_size);
-				sprintf(size_of_file, "%d", sobj.st_size);
+			
+				sprintf(length_of_file_name, "%d", strlen(entry->d_name));
+				printf("Write %s size of %s file into %s\n", length_of_file_name, entry->d_name, argv[2]);
+				write(dest_fd, length_of_file_name, strlen(length_of_file_name));
+				
+				printf("Write %s filename into %s\n", entry->d_name, argv[2]);
 				write(dest_fd, entry->d_name, strlen(entry->d_name));
+				
+				sprintf(size_of_file, "%d", sobj.st_size);
+				printf("Write %s file size %s file into %s\n", size_of_file, entry->d_name, argv[2]);
 				write(dest_fd, size_of_file, strlen(size_of_file));
+				
+				printf("Write data of %s into %s file\n",  entry->d_name, argv[2]);
 				while((ret = read(fd, buffer, sizeof(buffer))) != 0)
 				{
 					write(dest_fd, buffer, ret);
 					memset(buffer, 0, sizeof(buffer));
 				}
-				printf("Successfully written all the data from %s file into %s file \n", entry->d_name, argv[2]);
 			}
 			close(fd);
 		}
@@ -82,19 +92,31 @@ int main(int argc, char *argv[])
 
 
 /*output
-nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ gcc AssignmentFive4.c -o myexe -w
-nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./myexe que3_test_dir all_combined.txt
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./myexe  QUE4_DATA all_combined.txt
 .. is not a regular file
 ============================
-File : Hello.txt 
-size: 1338
-Successfully written all the data from Hello.txt file into all_combined.txt file 
+File : f2.txt 
+size: 1767
+Write 6 size of f2.txt file into all_combined.txt
+Write f2.txt filename into all_combined.txt
+Write 1767 file size f2.txt file into all_combined.txt
+Write data of f2.txt into all_combined.txt file
 ============================
-File : Demo.txt 
-size: 1338
-Successfully written all the data from Demo.txt file into all_combined.txt file 
+File : hello.txt 
+size: 216
+Write 9 size of hello.txt file into all_combined.txt
+Write hello.txt filename into all_combined.txt
+Write 216 file size hello.txt file into all_combined.txt
+Write data of hello.txt into all_combined.txt file
 ============================
 . is not a regular file
+============================
+File : f1.txt 
+size: 1312
+Write 6 size of f1.txt file into all_combined.txt
+Write f1.txt filename into all_combined.txt
+Write 1312 file size f1.txt file into all_combined.txt
+Write data of f1.txt into all_combined.txt file
 ============================
 Successfully write all file data into all_combined.txt file 
 nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ 

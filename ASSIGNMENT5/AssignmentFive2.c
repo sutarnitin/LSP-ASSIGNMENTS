@@ -6,20 +6,11 @@
 #include<unistd.h>
 #include<fcntl.h>
 
-#pragma pack(1)
-struct employee
-{
-    int empId;
-	double salary;
-    int age;
-	char ename[20];
-};
-
 int main(int argc, char *argv[])
 {
-    struct employee eobj;
     char fname[20];
-    int fd = 0;
+    int fd = 0, cnt=0, ret=0;
+	char ch[1]={'\0'};
 	 if(argc != 2)
 	{
 		 printf("Insufficient arguments\n");
@@ -27,27 +18,47 @@ int main(int argc, char *argv[])
 	}
 	
     fd = open(argv[1],O_RDONLY);
+	printf("Student Information:\n");
+	printf("Roll No:\t");
 	
-    read(fd,&eobj,sizeof(fname));
-	//printf("1. %s", fname);
-    printf("Employee ID : %d : \n",eobj.empId);
-    printf("Employee Name : %s : \n",eobj.ename);
-    printf("salary : %f : \n",eobj.salary);
-    printf("age : %d : \n",eobj.age);
-
+	while((ret = read(fd,ch,sizeof(ch))) != 0)
+	{
+		
+		if(ch[0]=='\n')
+		{
+			cnt +=1;
+			if(cnt ==1)
+			{
+				printf("\nMarks:\t");
+			}
+			else if(cnt==2){
+				printf("\nAge:\t");
+			}
+			else{
+				printf("\nName:\t");
+			}
+			
+			continue;
+		}
+		else
+		{
+			printf("%s", ch);
+		}
+		 memset(ch, 0, sizeof(ch));
+	}
+	printf("\n");
     close(fd);
 
     return 0;
 }
 
-//output
-
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ gcc AssignmentFive2.c -o myexe -w
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./m
-// mn.txt  myexe   
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./myexe < employee.txt 
-// Enter the file name : 
-// Roll number : 0 : 
-// Name :  : 
-// Marks : 0.000000 : 
-// Age : 0 : 
+/*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ gcc AssignmentFive2.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ ./myexe employee.txt 
+Student Information:
+Roll No:	12345
+Marks:	100
+Age:	25
+Name:	Nitin
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT5$ 
+*/

@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<dlfcn.h>
+#include<dlfcn.h>	
 #include<stdbool.h>
 
 int main()
@@ -8,7 +8,7 @@ int main()
     void *ptr = NULL;
     void *ptr2 = NULL;
     bool (*fptr)();
-    void (*fptr2)();
+    void (*fptr2)(int iNo);
 
 	printf("**************\n");
     ptr = dlopen("lib_prime.so",RTLD_LAZY);

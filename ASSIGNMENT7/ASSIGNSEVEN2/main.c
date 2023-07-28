@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
 	void *ptr = NULL;
-    void (*fptr)();
+    int (*fptr)(char *file1, char *file2);
 	
 	if(argc != 3)
 	{
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	
-    ptr = dlopen("lib_second.so",RTLD_LAZY);
+    ptr = dlopen("lib_fileOperation.so",RTLD_LAZY);
     if(ptr == NULL)
     {
         printf("Unable to load liabrary\n");
@@ -32,3 +32,16 @@ int main(int argc, char *argv[])
     return 0;
 	
 }
+
+
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ gcc -c -fpic CompaireFile.c -w
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ ls
+// CompaireFile.c  CompaireFile.o  Demo.txt  file.h  hello.txt  main.c
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ gcc CompaireFile.o -shared -o lib_fileOperation.so
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ gcc -c main.c -o main.o
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ gcc -o main main.o -L lib_fileOperation.so 
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ sudo cp lib_fileOperation.so /usr/lib
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ ./main hello.txt Demo.txt 
+// Size are same.
+// Two files have equal contents
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT7/ASSIGNSEVEN2$ 

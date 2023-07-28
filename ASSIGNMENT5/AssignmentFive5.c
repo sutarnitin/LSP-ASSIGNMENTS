@@ -12,18 +12,23 @@ int main(int argc, char *argv[])
 {
 	int fd = 0;
 	
-	if(int argc, char *argv[])
-	{
-		printf("Insufficient arguments\n");
-		return -1;
-	}
-	
 	if(argc != 2)
 	{
 		printf("insufficient arguments\n");
 		return -1;
 	}
 	
+	fd = open(argv[1], O_RDONLY);
+	if(fd == -1)
+	{
+		printf("1. Unable to open file %s\n", argv[1]);
+	}
+	
+	while((ret = read(fd, buffer, sizeof(buffer))) != 0)
+	{
+		write(dest_fd, buffer, ret);
+		memset(buffer, 0, sizeof(buffer));
+	}
 }
 
 //output
