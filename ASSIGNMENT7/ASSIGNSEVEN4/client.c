@@ -2,14 +2,12 @@
 #include<stdlib.h>
 #include<dlfcn.h>	
 
-int main(int argc, char *argv[])
+
+int Display(int num)
 {
-	if(argc != 2)
-	{
-		printf("Insufficient arguments\n");
-	}
+	printf("We are calculating the factorial %d\n", num);
 	
-    void *ptr = NULL;
+	void *ptr = NULL;
     void (*fptr)(int iNo);
 
     ptr = dlopen("lib_factorial.so",RTLD_LAZY);
@@ -26,10 +24,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 	
-	fptr(atoi(argv[1]));
+	fptr(num);
 	
     return 0;
 }
-
-
-

@@ -10,16 +10,16 @@ int main(int argc, char *argv[])
 	}
 	
     void *ptr = NULL;
-    void (*fptr)(int iNo);
+    int (*fptr)(int num);
 
-    ptr = dlopen("lib_factorial.so",RTLD_LAZY);
+    ptr = dlopen("lib_client.so",RTLD_LAZY);
     if(ptr == NULL)
     {
         printf("Unable to load liabrary\n");
         return -1;
     }
 	
-    fptr = dlsym(ptr,"CalculateFactorial");
+    fptr = dlsym(ptr,"Display");
     if(fptr == NULL)
     {
         printf("Unable to load the address of function\n");

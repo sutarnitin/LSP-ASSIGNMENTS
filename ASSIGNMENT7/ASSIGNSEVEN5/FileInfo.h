@@ -1,0 +1,1 @@
+int FileInfo(char fptr[]);
