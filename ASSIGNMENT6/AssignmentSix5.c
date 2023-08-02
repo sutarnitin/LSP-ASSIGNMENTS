@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     }
 	buffer=malloc(atoi(argv[2])*sizeof(char));
 
-    fd = open(argv[1], O_WDONLY|O_RDONLY);
+    fd = open(argv[1], O_RDONLY|O_WRONLY, 0666);
 	
     if(fd == -1)
     {
@@ -29,12 +29,15 @@ int main(int argc, char *argv[])
         return -1;
     }
 	
-	lseek(fd, atoi(argv[2]), SEEK_CUR);
-	ret = truncate(fd, 10);
-    printf("Deleted data from %s file after %s position:\n",argv[1], argv[2]);
+	ret = ftruncate(fd, atoi(argv[2]));
+    printf("Deleted data after %s position from %s file\n",argv[2], argv[1]);
 	close(fd);
     return 0;
 }
 
 /*output
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT6$ gcc AssignmentSix5.c -o myexe -w
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT6$ ./myexe que5_input.txt 15
+Deleted data after 15 position from que5_input.txt file
+nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT6$ 
 */

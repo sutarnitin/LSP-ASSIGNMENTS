@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<fcntl.h>
+#include "FileInfo.h"
 
 int FileInfo(char fptr[])
 {
