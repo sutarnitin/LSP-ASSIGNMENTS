@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 	}
 
 
-printf("Number of capital characters are %d\n", iCnt);
+		printf("Number of capital characters are %d\n", iCnt);
 
 		fd1 =  open("count.txt", O_WRONLY | O_CREAT, 06660);
 		char str[50];
