@@ -1,0 +1,5 @@
+all:
+		@gcc OpenFile.c OpenFileMain.c -o OpenFileMain -w
+		
+run:
+		@./OpenFileMain

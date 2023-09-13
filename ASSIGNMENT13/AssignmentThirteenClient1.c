@@ -38,8 +38,20 @@ int main()
 }
 
 //Output
-// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT13$ ./Client 
-// Server: 
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT13$ ./Server 
 // Hello
+// Client: 
+
+
+// Client: Hey
+
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT13$ gcc AssignmentThirteenClient1.c -o Client
+// nitin@Nitin:~/Documents/LSP-ASSIGNMENTS/ASSIGNMENT13$ ./Client 
+
+// Server: Hello
 
 // Hey
+// Server: 
+// ello
+
+

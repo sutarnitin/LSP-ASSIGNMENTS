@@ -1,0 +1,1 @@
+int  OpenFile(char fileName[], int mode);

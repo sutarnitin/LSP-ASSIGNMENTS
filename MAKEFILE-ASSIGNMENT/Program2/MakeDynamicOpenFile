@@ -1,0 +1,5 @@
+all:
+		@gcc DynamicOpenFile.c DynamicOpenFileMain.c -o DynamicOpenFile -w
+		
+run:
+		@./DynamicOpenFile Demo.txt read
