@@ -1,0 +1,5 @@
+all:
+	@gcc ReadBytesOfFileMain.c  ReadBytesOfFile.c -o ReadBytesOfFile -w
+	
+run:
+	@./ReadBytesOfFile Demo.txt 20

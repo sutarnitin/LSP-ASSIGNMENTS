@@ -27,7 +27,7 @@ int main(int argc, char * argv[])
 	{
 		mode = X_OK;
 	}
-	 	
+	
 	if(access(argv[1], mode) < 0)
 	{
 		printf("Unable to access %s file in %s mode \n ", argv[1], argv[2]);

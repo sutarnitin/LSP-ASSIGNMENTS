@@ -1,0 +1,5 @@
+all:
+		@gcc PrintInfoOfFileMain.c PrintInfoOfFile.c -o PrintInfoOfFile -w
+		
+run:
+	@./PrintInfoOfFile Demo.txt

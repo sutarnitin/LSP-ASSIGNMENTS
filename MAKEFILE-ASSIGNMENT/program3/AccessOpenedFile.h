@@ -1,0 +1,1 @@
+int AccessFile(char fileName[], int mode);

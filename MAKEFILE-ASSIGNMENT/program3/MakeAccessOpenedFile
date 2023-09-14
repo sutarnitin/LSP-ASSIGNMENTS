@@ -1,0 +1,5 @@
+all:
+		@gcc AccessOpenedFileMain.c AccessOpenedFile.c -o AccessOpenedFile -w
+		
+run:
+		@./AccessOpenedFile Demo.txt Write
